@@ -1,0 +1,82 @@
+<html>
+  <head>
+<style>
+.coloumn-layout{
+display:flex;
+  flex-wrap: wrap;
+}
+.coloumn{
+ flex:1
+}
+p {
+color:white;
+  font-family: Helvetica, Arial, sans-serif;
+  padding:1em;
+}
+body {
+  background-color: black;
+}
+h1,h2{
+color:lightgreen;
+
+}
+.footer{
+                text-align: center;
+                background-color: silver;
+                font-family: 'Segoe UI';
+            }
+</style>
+
+  </head>
+<header>
+<h1 align="center">3 COLOUMN LAYOUT</h1>
+<h2 align="center">INFO ABOUT BATSMAN</h1>
+</header>
+<div class="coloumn-layout">
+<div class="coloumn" >
+  <img src="virat.jpg" id="viratpic">
+<p>
+A spunky, chubby teenager with gelled hair shot to fame after leading India to glory in the Under-19 World Cup at Kuala Lumpur in early 2008. 
+In an Indian team filled with saint-like icons worthy of their own hagiographies, Virat Kohli, with his most un-Indian,
+ 'bad-boy' intensity, would clearly be an outcast. 
+  </p>
+  <button  onClick="rcb()" >RCB</button>
+</div>
+<div class="coloumn">
+    <img id="uv" src="yuvraj.jpg" >
+<p>
+There are very few better sights in world cricket than witnessing a free-flowing Yuvraj Singh at his best. 
+Undoubtedly, he is right up there among the greatest match-winners in white-ball cricket. 
+
+ 
+  </p>
+    <button  onClick="MI()" >Mumbai INDIANS</button>
+    </div>
+    <div class="coloumn">
+        <img src="smith.png" id="smith">
+		
+<p>
+
+The best Test batsman at present, Steven Smith's career redemption is a story for the ages. Having made his name initially as a potential leg-spinner who could bat a bit, 
+there was immense criticism, even among those in Australia over the quality of his selection during his early days in international cricket. 
+
+  </p>
+  <button  onClick="rr()" >RR</button>
+
+  </div>
+        
+</div>
+<footer class="footer">
+ Cricbuzz
+</footer>
+<script>
+function rcb(){
+document.getElementById("viratpic").src="rcb.png"
+}
+function MI(){
+document.getElementById("uv").src="uv.jpg"
+}
+function rr(){
+document.getElementById("smith").src="smith2.png"
+}
+</script>
