@@ -17,9 +17,8 @@ function createTag(tag, parent, attributes, content) {
 
 async function getProfileInfo(playerID) {
     const apiKey = "GKI0xmJ2BEZB42A3SLSjmGK0iKB2";
-    const url = `http://cricapi.com/api/playerStats?pid=${playerID}&apikey=${apiKey}`;
+    const url = `https://cricapi.com/api/playerStats?pid=${playerID}&apikey=${apiKey}`;
     let info = await fetch(url).then(res => res.json());// Wait till json is generated
-console.log(info);
     return info;
 
 }
