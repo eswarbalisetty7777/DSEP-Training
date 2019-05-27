@@ -1,9 +1,21 @@
-<link rel="stylesheet" href="styles.css" type="text/css">
-<header id="header">
-       
-</header>
-<main id="main"></main>
-<footer class="footer">
-        Cricbuzz
-       </footer>
-<script src="content.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles.css"></head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="#home">Home</a>
+  <a onclick="generateContent('virat')">Virat Kohli</a>
+  <a onclick="generateContent('yuvraj')">Yuvraj Singh</a>
+  <a onclick="generateContent('gambhir')"> Gautam Gambhir</a>
+</div>
+
+<div style="padding-left:16px">
+ <h1>Cricket Info</h1>
+</div>
+<div id="cricketer"></div>
+</body>
+<script src="script.js"> </script>
+</html>
