@@ -4,12 +4,13 @@ const search = async (param) => {
   }
   else {
     let url = "";
+    let showID=0;
     let show = document.getElementById("search").value
     if (param == 'Movie') {
-      url = `https://api.themoviedb.org/3/search/movie?api_key=6b887e397490d385fcf599514f820e0c&language=en-US&query=${show}&page=1&include_adult=false`
+      url = `https://api.themoviedb.org/3/search/movie?api_key=6b887e397490d385fcf599514f820e0c&language=en-US&query=${show}&page=1&include_adult=true`
     }
     else if (param == 'Tvseries') {
-      url = `https://api.themoviedb.org/3/search/tv?api_key=6b887e397490d385fcf599514f820e0c&language=en-US&query=${show}&page=1&include_adult=false`
+      url = `https://api.themoviedb.org/3/search/tv?api_key=6b887e397490d385fcf599514f820e0c&language=en-US&query=${show}&page=1&include_adult=true`
 
     }
 
@@ -28,11 +29,17 @@ const search = async (param) => {
         }
       }
     });
+showID=showJSON.results[0].id;
+{/* */}
+let similarSearchPromise=await fetch(`
+https://api.themoviedb.org/3/movie/${showID}/similar?api_key=6b887e397490d385fcf599514f820e0c&language=en-US&page=1`);
+let similarSearchJSON=await similarSearchPromise.json();
 
     document.getElementById("movie_info").innerHTML = `
   <center><img src=http://image.tmdb.org/t/p/w154/${showJSON.results[0].poster_path}></center>
   
-  <h3 >Genres  :${genresNames}</h3>
+  <h3>Genres  :${genresNames}</h3>
+  <h3>SIMILAR SHOWS  :${similarSearchJSON.results[0].title} ,${similarSearchJSON.results[1].title}</h3>
   <h3> Plot :${showJSON.results[0].overview}</h3>
 
   `
@@ -96,7 +103,7 @@ clearHome = () => {
 
 async function searchCelebrity() {
   let celebrity = document.getElementById("search").value
-  let celebrityPromise = await fetch(`https://api.themoviedb.org/3/search/person?api_key=6b887e397490d385fcf599514f820e0c&language=en-US&query=${celebrity}&page=1&include_adult=false`)
+  let celebrityPromise = await fetch(`https://api.themoviedb.org/3/search/person?api_key=6b887e397490d385fcf599514f820e0c&language=en-US&query=${celebrity}&page=1&include_adult=true`)
   let celebrityJSON = await celebrityPromise.json();
   document.getElementById("celebrity_info").innerHTML = `
 <center><img src=http://image.tmdb.org/t/p/w154/${celebrityJSON.results[0].profile_path}></center>
