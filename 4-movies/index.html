@@ -2,7 +2,13 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" href="scripts/searchStyle.css">
+<style>
+  div{
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+</style>
 <script src="./scripts/movies_script.js"> </script>
 </head>
 
@@ -10,15 +16,19 @@
 <body>
 
 <div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a onclick="init('movies')" >MOVIES</a>
-  <a id="2"  onclick="init('tvseries')" >TV SHOWS</a>
+  <a  href="#home" class="active"  id="home" onclick="clearScreen()" onload="clearScreen()">Home</a>
+  <a onclick="init('Movie')" >MOVIES</a>
+  <a id="2"  onclick="init('Tvseries')" >TV SHOWS</a>
   <a id="3"  onclick="init('celebrity')" > CELEBRITIES</a>
 </div>
-<h4>Please click on movies and search only hollwood movies</h4>
-<div id="movies"></div>
+
+<div id="homeHtml"></div>
+<div id="movieSearch"> </div>
 <div id="tvseries"></div>
 <div id="celebrity"></div>
 <div id="movie_info"></div>
+<div id="tvseries_info"></div>
+<div id="celebrity_info"></div>
+
 </div>
 </body>
