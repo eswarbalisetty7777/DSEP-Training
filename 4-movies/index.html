@@ -3,29 +3,29 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="scripts/searchStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
   div{
     margin-top: 1em;
     margin-bottom: 1em;
   }
 </style>
-<script src="./scripts/movies_script.js"> </script>
+<script src="./scripts/movies_script.js" type="module"> </script>
+
 </head>
 
 
 <body>
 
 <div class="topnav">
-  <a  href="#home" class="active"  id="home" onclick="clearScreen()" onload="clearScreen()">Home</a>
-  <a onclick="init('Movie')" >MOVIES</a>
-  <a id="2"  onclick="init('Tvseries')" >TV SHOWS</a>
-  <a id="3"  onclick="init('celebrity')" > CELEBRITIES</a>
+  <a  href="#home" class="active"  id="home"  >Home</a>
+  <a  id="1" class="">MOVIES</a>
+  <a id="2"    class="">TV SHOWS</a>
+  <a id="3"  class=""> CELEBRITIES</a>
 </div>
-
 <div id="homeHtml"></div>
-<div id="movieSearch"> </div>
-<div id="tvseries"></div>
-<div id="celebrity"></div>
+<div id="searchBar"></div>
 <div id="movie_info"></div>
 <div id="tvseries_info"></div>
 <div id="celebrity_info"></div>
