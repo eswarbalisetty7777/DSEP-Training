@@ -1,7 +1,7 @@
 import { clearAll,clearMovie, clearCelebrity, clearHome, clearTvSeries } from './clearThings.js'
 import { apiKey, preUrl, postUrl, language } from './constants.js'
 import { setNavActive, setNavInActive } from './navigations.js'
-
+var index=0
 //search 
 const search = async (param) => {
   clearMovie()
@@ -12,64 +12,11 @@ const search = async (param) => {
     searchCelebrity()
   }
   else {
-    let url = "";
-    let showID = 0;
-    let show = document.getElementById("search").value
-    if (param == 'Movie') {
-      url = `${preUrl}movie?api_key=${apiKey}&language=${language}&query=${show}&${postUrl}`
-    }
-    else if (param == 'Tvseries') {
-      url = `${preUrl}tv?api_key=${apiKey}&language=${language}&query=${show}&${postUrl}`
-
-    }
-
-    let showPromise = await fetch(url);
-    let showJSON = await showPromise.json();
-    if (showJSON.results.length === 0) {
-      togglseStatus(false)
-    }
-    else {
-      togglseStatus(true)
-      let genresPromise = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=${language}
-      `);
-      let genresJSON = await genresPromise.json();
-      let genresId = showJSON.results[0].genre_ids;
-      let genresNames = []
-
-      genresId.forEach(element => {
-        for (let i = 0; i < genresJSON.genres.length; i++) {
-          if (element == genresJSON.genres[i].id) {
-            genresNames.push(genresJSON.genres[i].name)
-          }
-        }
-      });
-      showID = showJSON.results[0].id;
-      {/* */ }
-      console.log(showID)
-      let similarSearchPromise = await fetch(`
-    https://api.themoviedb.org/3/movie/${showID}/similar?api_key=${apiKey}&language=${language}`);
-      let similarSearchJSON = await similarSearchPromise.json();
-      if (similarSearchJSON.results.length > 0) {
-        document.getElementById("movie_info").innerHTML = `
-      <center><img src=http://image.tmdb.org/t/p/w154/${showJSON.results[0].poster_path}></center>
-      
-      <h3>Genres  :${genresNames}</h3>
-      <h3>SIMILAR SHOWS  :${similarSearchJSON.results[0].title} ,${similarSearchJSON.results[1].title}</h3>
-      <h3> Plot :${showJSON.results[0].overview}</h3>
+    await  showMovieorTv(index,param);
+    // 
+    // console.log(index)
     
-      `
-      }
-      else {
-        document.getElementById("movie_info").innerHTML = `
-  <center><img src=http://image.tmdb.org/t/p/w154/${showJSON.results[0].poster_path}></center>
-  
-  <h3>Genres  :${genresNames}</h3>
-  <h3> Plot :${showJSON.results[0].overview}</h3>
-
-  `
-      }
-    }
-
+    
   }
 }
 
@@ -153,6 +100,52 @@ const home = () => {
   document.getElementById("searchBar").innerHTML=""
 }
 
+const showMovieorTv=async (index,param)=>{
+  let url = "";
+    let show = document.getElementById("search").value
+    if (param == 'Movie') {
+      url = `${preUrl}movie?api_key=${apiKey}&language=${language}&query=${show}&${postUrl}`
+    }
+    else if (param == 'Tvseries') {
+      url = `${preUrl}tv?api_key=${apiKey}&language=${language}&query=${show}&${postUrl}`
+
+    }
+
+    let showPromise = await fetch(url);
+    let showJSON = await showPromise.json();
+    if (showJSON.results.length === 0||index>=showJSON.results.length ) {
+      togglseStatus(false)
+    
+    }
+    else {
+     
+      togglseStatus(true)
+      let genresPromise = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=${language}
+      `);
+      let genresJSON = await genresPromise.json();
+      let genresId = showJSON.results[index].genre_ids;
+      let genresNames = []
+
+      genresId.forEach(element => {
+        for (let i = 0; i < genresJSON.genres.length; i++) {
+          if (element == genresJSON.genres[i].id) {
+            genresNames.push(genresJSON.genres[i].name)
+          }
+        }
+      });
+     
+         document.getElementById("movie_info").innerHTML = `
+  <center><img src=http://image.tmdb.org/t/p/w154/${showJSON.results[index].poster_path}>
+  <button type="button" id="next"> Next</button>
+</center>
+  <h3>Genres  :${genresNames}</h3>
+  <h3> Plot :${showJSON.results[index].overview}</h3>
+
+  `
+  document.getElementById("next").addEventListener('click',()=>showMovieorTv(++index,param)) 
+    }
+  
+  }
 
 
 
